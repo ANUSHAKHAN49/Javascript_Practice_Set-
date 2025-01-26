@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       *{
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+       }
+       body{
+       position: fixed;
+       background: center;
+        background-color:blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       }
+       .box{
+        height: 300px;
+        width: 100%;
+        max-width: 540px;
+        display: flex;
+       margin-right: 0px;
+        margin-top: 100px;
+        margin-left: 300px;
+        margin-right: auto;
+        background-color: pink;
+        flex-direction: column;
+        border-radius: 10px;
+        padding-bottom: 20px;
+       }
+       .box h2{
+        margin-left: 50px;
+        margin-top: 20px;
+       
+       }
+       .task{
+        height: 50px;
+        width: 350px;
+        margin-right: 90px;
+        margin-left: 50px;
+        background-color: rgb(252, 235, 84);
+        border-radius: 20px;
+        margin-top: 40px;
+       }
+       .task input{
+        height: 50px;
+        width: 250px;
+        background: transparent;
+        outline: none;
+        border: none;
+        padding-left: 40px;
+       }
+       .task button{
+        height: 40px;
+        width: 80px;
+        background-color: rgb(209, 60, 177);
+        border: none;
+        outline: none;
+        border-radius: 15px;
+        font-weight: bold;
+       }
+       .list{
+        margin-left: 90px;
+        margin-top: 20px;
+        padding-top: 10;
+       }
+       .colors{
+        height: 50px;
+        width: 200px;
+        border:2px solid black;
+        outline: black;
+        margin-left: 0px;
+        margin-left: 200px;
+       }
+       .theme{
+        height: 46px;
+        width:46px;
+        padding-left: 10px;
+        background-color: orchid;
+        border: none;
+       }
+       .theme2{
+        height: 46px;
+        width:46px;
+        background-color: purple;
+        border: none;
+       }
+       .theme3{
+        height: 46px;
+        width:46px;
+        background-color: rgb(151, 45, 62);
+        border: none;
+       }
+       ul span {
+        margin-left:200px ;
+        border-radius: 50%;
+        padding: 7px;
+        font-size: 20px;
+        user-select: none;
+        cursor: pointer;
+       
+       }
+       ul li span:hover{
+        background-color: palevioletred;
+        padding: 8px;
+       }
+    </style>
+</head>
+<body>
+  
+  <div class="box">
+    <h2>TO DO LIST</h2><br>
+      <div  class="task">
+        <input type="text" id = "inputbox" placeholder="type your task">
+        <button onclick="save()">Save</button>
+      </div>
+      <div>
+    <ul class="list">
+      <!-- <li>task1</li>
+      <li>task2</li>
+      <li>task3</li> -->
+    </ul></div>
+    
+  </div>
+   <div class="colors">
+   <button onclick="change()" class="theme"></button>
+   <button onclick="change2()" class="theme2"></button>
+   <button onclick="change3()" class="theme3"></button>
+   </div>
+</body>
+<script>
+
+// To Do App
+
+  const task = document.querySelector('#inputbox')
+    const tasklist = document.querySelector('.list')
+    let bodyElement = document.body
+  
+  
+    function save(){
+      if(task.value === ''){
+        alert("you must write something to add");}
+    else {let li = document.createElement("li");
+      li.innerHTML = task.value; tasklist.appendChild(li)
+      let span = document.createElement("span");
+      span.innerHTML = "\u00d7";
+      li.appendChild(span);
+    }
+    
+     task.value = "";
+    saveData();
+    }
+    function change(){
+      bodyElement.style.backgroundColor = "orchid"
+      saveData()
+    }
+    function change2(){
+      bodyElement.style.backgroundColor = "purple"
+      saveData()
+    }
+    function change3(){
+      bodyElement.style.backgroundColor = "rgb(151, 45, 62)"
+      saveData()
+    } 
+   function saveData(){
+    localStorage.setItem("data",tasklist.innerHTML);
+   }
+   function tasksave(){
+    tasklist.innerHTML = localStorage.getItem("data");
+   }
+   tasksave();
+  
+   tasklist.addEventListener('click',function(e){
+       if(e.target.tagName === "SPAN"){
+     e.target.parentElement.remove();
+     saveData();
+       }
+  
+  
+       
+   });
+  
+  
+   
+   </script>
+</html>
