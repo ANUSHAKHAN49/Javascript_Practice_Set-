@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .clock {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+        input {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            font-size: 16px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Alarm Clock</h1>
+    <div class="clock" id="current-time">00:00:00</div>
+    <div>
+        <label for="alarm-time">Set Alarm: </label>
+        <input type="time" id="alarm-time">
+        <button onclick="setAlarm()">Set Alarm</button>
+    </div>
+    <div id="status"></div>
+
+    <audio id="alarm-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+    <script>
+        const currentTimeElement = document.getElementById('current-time');
+        const statusElement = document.getElementById('status');
+        const alarmSound = document.getElementById('alarm-sound');
+        let alarmTime = null;
+        let alarmTimeout = null;
+
+        // Update the clock every second
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            currentTimeElement.textContent = timeString;
+
+            if (alarmTime && timeString === alarmTime) {
+                clearTimeout(alarmTimeout);
+                alarmSound.play();
+                alert('⏰ Alarm is ringing!');
+                alarmTime = null; // Reset alarm
+                statusElement.textContent = '';
+            }
+        }
+        setInterval(updateClock, 1000);
+
+        function setAlarm() {
+            const alarmInput = document.getElementById('alarm-time');
+            alarmTime = alarmInput.value + ':00'; // Add seconds to match the format
+
+            if (!alarmInput.value) {
+                alert('Please select a valid time for the alarm.');
+                return;
+            }
+
+            statusElement.textContent = `Alarm set for ${alarmInput.value}.`;
+            alarmTimeout = setTimeout(() => {
+                alarmTime = null;
+                statusElement.textContent = '';
+            }, 24 * 60 * 60 * 1000); // Reset alarm after 24 hours
+        }
+    </script>
+</body>
+</html>
