@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .card{
+        background-color: rgb(33, 33, 129);
+        height: 400px;
+        width: 600px;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+       justify-content: space-around;
+       margin-top: 40px;
+       padding-top: 30px;
+       border-radius: 10px;
+        
+    }
+    button{
+        height: fit-content;
+        width: 100px;
+        border-radius: 5px;
+        height: 50px;
+        border: none;
+        background-color: aqua;
+        cursor: pointer;
+    }
+    h1{
+        display:flex;
+        flex-direction: row;
+    }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2 id="head">card</h2>
+        <button id="reset" class="btn">Reset</button>
+        <button id="cart" class="btn">Add to cart</button>
+     <script>
+        let head = document.getElementById("head")
+        let btnadd = document.getElementById("cart")
+        let btnres = document.getElementById("reset")
+        let count = 1
+        
+        btnadd.addEventListener("click",()=>{ 
+        head.innerText= "Buy items" + count
+        count++
+        
+        })
+        btnres.addEventListener("click",()=>{ 
+            head.innerText= "Buy items" + 0
+            count=0
+            
+            })</script>
+</body>
+</html>
