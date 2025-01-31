@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+<style>
+     .heading{
+         height: 100px;
+         background-color: black;
+         color: pink;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+
+        }
+        .clock{
+            height: 100px;
+            width: 300px;
+            border-radius: 10px;
+            margin-left: 500px;
+            background-color: black;
+            margin-top: 100px;
+            color: pink;
+            font-size: 40px;
+            display: flex;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+        }
+
+</style>
+<body>
+    <h1 class="heading">Digital Clock</h1>
+    <div id="clock" class="clock"><div id="hours">00</div><span>:</span><div id="min">03</div><span>:</span>
+    <div id="sec">12</div>
+       </div>
+</body>
+<script>let h = new Date()
+    setInterval(() => {
+     hours.innerHTML = h.getHours()
+     min.innerHTML = h.getMinutes()
+     sec.innerHTML = h.getSeconds()
+    }, 1000);</script>
+</html>
